@@ -1,4 +1,5 @@
 ﻿using BrainAcademyASPMVCAntonPluzhnikov.Models;
+using DataObjectsLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,17 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Utils
             {
                 id = Books.Max(x => x.Id) + 1;
             }
-            Books.Add(new Book { Id = id, Author = autor, Title = title, ISBN = isbn });
+            Books.Add(new Book { Id = id, Title = title, ISBN = isbn });
         }
+
+        public static void Add(this IList<Book> Books, Library library) {
+            int id = 1;
+            if (Books != null && Books.Count > 0)
+            {
+                id = Books.Max(x => x.Id) + 1;
+            }
+            library.Books.ForEach(Books.Add);
+            //Books.Add (new Book { Id = id, Title = title, ISBN = isbn });
+        }        
     }
 }

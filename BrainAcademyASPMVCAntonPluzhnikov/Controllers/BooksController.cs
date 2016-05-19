@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BrainAcademyASPMVCAntonPluzhnikov.Utils;
+using DataObjectsLayer.Models;
 
 namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
 {
@@ -36,7 +37,7 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
                 if (!ModelState.IsValid)
                     return View();
 
-                Books.Add(book.Author, book.Title, book.ISBN);
+                //Books.Add(book.Author, book.Title, book.ISBN);
                 return RedirectToAction("Index");
 
             }
@@ -60,10 +61,10 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
                 if (!ModelState.IsValid)
                     return View();
                 // TODO: Add update logic here
-                Book b = Books.First(x => x.Id == id);
+                /*Book b = Books.First(x => x.Id == id);
                 b.Author = book.Author;
                 b.Title = book.Title;
-                b.ISBN = book.ISBN;
+                b.ISBN = book.ISBN;*/
                 return RedirectToAction("Index");
             }
             catch
