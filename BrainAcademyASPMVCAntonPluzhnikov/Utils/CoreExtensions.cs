@@ -33,7 +33,7 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Utils
             {
                 id = Books.Max(x => x.Id) + 1;
             }
-            library.Books.ForEach(Books.Add);
+            Books.Add(library.Book);
             //Books.Add (new Book { Id = id, Title = title, ISBN = isbn });
         }        
     }

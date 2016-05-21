@@ -9,8 +9,18 @@ namespace DataObjectsLayer.Models
 {    
     public class Library
     {
-        public virtual ICollection<Author> Authors { get; set; }
-        public virtual List<Book> Books { get; set; }
+
+        public int Id { get; set; }
+        //[Key]
+        public int BookId { get; set; }
+
+        //[Key]
+        public int AuthorId { get; set; }
+
+        
+        public virtual Author Author { get; set; }
+        
+        public virtual Book Book { get; set; }
         
         
     }

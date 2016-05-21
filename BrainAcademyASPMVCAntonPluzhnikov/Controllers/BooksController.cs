@@ -11,11 +11,11 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
 {
     public class BooksController : Controller
     {
-        public static IList<Book> Books = new List<Book>();
+        public static IList<Library> Library = new List<Library>();
         // GET: Books
         public ActionResult Index() {
-            IEnumerable<Book> books = Books;
-            return View(books);
+            IEnumerable<Library> library = Library;
+            return View(library);
         }
 
         // GET: Books/Details/5

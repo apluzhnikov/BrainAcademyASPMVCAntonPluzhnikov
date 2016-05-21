@@ -12,8 +12,10 @@ namespace BooksEntityApproach
     {
         protected LibraryDBContext dbContext;
 
+        private int count;
         public DataObjectsManager() {
             dbContext = new LibraryDBContext();
+            //count = dbContext.Books.Count();
         }
 
         abstract public T this[int index] { get; }

@@ -26,7 +26,7 @@ namespace BrainAcademyASPMVCAntonPluzhnikov
             PersonsController.Persons.Add("Vasia");*/
 
             IDataObjectsManager<Library> dataManager = new EntityApproachDataManager();
-
+            
             foreach (var library in dataManager.GetAll())
                 BooksController.Books.Add(library);
             /*BooksController.Books.Add("Anton", "My first book", "");
