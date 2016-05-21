@@ -49,9 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorsDataManager.cs" />
+    <Compile Include="BooksDataManager.cs" />
     <Compile Include="Configs\LibraryConfig.cs" />
     <Compile Include="DataObjectsManager.cs" />
-    <Compile Include="EntityApproachDataManager.cs" />
+    <Compile Include="LibraryDataManager.cs" />
     <Compile Include="LibraryDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

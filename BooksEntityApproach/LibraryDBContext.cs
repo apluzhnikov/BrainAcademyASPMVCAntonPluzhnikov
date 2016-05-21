@@ -13,11 +13,12 @@ namespace BooksEntityApproach
     public class LibraryDBContext : DbContext
     {
         public LibraryDBContext()
-            : base("name=LibraryDB") {
-            //Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
+            //: base("name=LibraryDBBA") {
+                : base("name=LibraryDBBA") {
+                Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CustomersProductsDBContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomersProductsDBContext, Configuration>());
-            Database.SetInitializer(new DropCreateDatabaseAlways<LibraryDBContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<LibraryDBContext>());
         }
 
         public virtual DbSet<Book> Books { get; set; }
@@ -26,7 +27,6 @@ namespace BooksEntityApproach
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
-
 
             modelBuilder.Configurations.Add(new LibraryConfig());
 

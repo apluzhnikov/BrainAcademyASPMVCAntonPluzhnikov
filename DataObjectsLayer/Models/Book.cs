@@ -8,8 +8,8 @@ using System.Web;
 
 namespace DataObjectsLayer.Models
 {
-    [MetadataType(typeof(BookMetadata))]
-    public class Book  //in case if you need an additional validation, like title depends on Author: IValidatableObject
+    //[MetadataType(typeof(BookMetadata))]
+    public class Book //: IValidatableObject
     {
 
         [Key]
@@ -25,10 +25,20 @@ namespace DataObjectsLayer.Models
 
         public virtual ICollection<Library> Library { get; set; }
 
-
+        public virtual List<Hit> Hits { get; set; }
 
         /*public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
-            throw new NotImplementedException();            
+            var results = new List<ValidationResult>();
+
+            var count = Library.Count(arg => arg.BookId == Id && arg.Author != null);
+            if(count > 0)
+            {
+                results.Add(new ValidationResult("This book doesn't have an author. Please add at least one"));
+            }
+
+            return results;
         }*/
+
+        
     }
 }

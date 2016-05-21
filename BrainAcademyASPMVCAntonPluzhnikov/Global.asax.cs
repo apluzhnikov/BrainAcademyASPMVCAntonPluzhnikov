@@ -12,6 +12,7 @@ using BrainAcademyASPMVCAntonPluzhnikov.Utils;
 using DataObjectsLayer;
 using BooksEntityApproach;
 using DataObjectsLayer.Models;
+using BrainAcademyASPMVCAntonPluzhnikov.App_Start;
 
 namespace BrainAcademyASPMVCAntonPluzhnikov
 {
@@ -22,13 +23,18 @@ namespace BrainAcademyASPMVCAntonPluzhnikov
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            
             /*PersonsController.Persons.Add("Anton");
             PersonsController.Persons.Add("Vasia");*/
 
-            IDataObjectsManager<Library> dataManager = new EntityApproachDataManager();
-            
+            /*IDataObjectsManager<Library> dataManager = new LibraryDataManager();
+
             foreach (var library in dataManager.GetAll())
-                BooksController.Books.Add(library);
+                BooksTestController.Books.Add(library);*/
+
+
+            /*IDataObjectsManager<Book> dataManager = new BooksDataManager();
+            BooksController.Books = dataManager.GetAll();*/
             /*BooksController.Books.Add("Anton", "My first book", "");
             BooksController.Books.Add("Vasia", "His first book", "");*/
         }

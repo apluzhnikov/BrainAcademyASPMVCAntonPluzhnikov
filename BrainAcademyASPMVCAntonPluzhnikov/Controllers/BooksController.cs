@@ -1,21 +1,29 @@
-﻿using BrainAcademyASPMVCAntonPluzhnikov.Models;
+﻿using BooksEntityApproach;
+using BrainAcademyASPMVCAntonPluzhnikov.App_Start;
+using DataObjectsLayer;
+using DataObjectsLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BrainAcademyASPMVCAntonPluzhnikov.Utils;
-using DataObjectsLayer.Models;
+using Microsoft.Practices.Unity;
 
 namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
 {
     public class BooksController : Controller
     {
-        public static IList<Library> Library = new List<Library>();
+        readonly private IDataObjectsManager<Book> _booksManager;
+        
+        public BooksController() {
+            _booksManager = UnityConfig.GetConfiguredContainer().Resolve<IDataObjectsManager<Book>>("ef");
+        }
+
         // GET: Books
-        public ActionResult Index() {
-            IEnumerable<Library> library = Library;
-            return View(library);
+        public ActionResult Index()
+        {
+            var books = _booksManager.GetAll();
+            return View(books);
         }
 
         // GET: Books/Details/5
@@ -37,8 +45,9 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
                 if (!ModelState.IsValid)
                     return View();
 
-                //Books.Add(book.Author, book.Title, book.ISBN);
-                return RedirectToAction("Index");
+                _booksManager.Add(book);
+                _booksManager.SaveChanges();
+                return RedirectToAction("Create", "Authors", new { bookId = book.Id });
 
             }
             catch
@@ -47,51 +56,14 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
             }
         }
 
-        // GET: Books/Edit/5
-        public ActionResult Edit(int id) {
-            Book book = Books.First(x => x.Id == id);
-            return View(book);
-        }
-
-        // POST: Books/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, Book book) {
-            try
+        public string GetAuthors(Book book) {
+            var b = _booksManager[book.Id];
+            List<Author> authors = new List<Author>();
+            if (book.Library != null)
             {
-                if (!ModelState.IsValid)
-                    return View();
-                // TODO: Add update logic here
-                /*Book b = Books.First(x => x.Id == id);
-                b.Author = book.Author;
-                b.Title = book.Title;
-                b.ISBN = book.ISBN;*/
-                return RedirectToAction("Index");
+                authors = book.Library.Where(arg => arg.AuthorId > 0).Select(arg=> arg.Author).ToList();                
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Books/Delete/5
-        public ActionResult Delete(int id) {
-            Book book = Books.First(x => x.Id == id);
-            return View(book);
-        }
-
-        // POST: Books/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection) {
-            try
-            {
-                // TODO: Add delete logic here
-                Books = Books.Where(x => x.Id != id).ToList();
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return string.Join(", ", authors);
         }
     }
 }

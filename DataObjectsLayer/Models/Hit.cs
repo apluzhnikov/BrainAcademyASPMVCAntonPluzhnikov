@@ -6,22 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataObjectsLayer.Models
-{    
-    public class Library
+{
+    public class Hit
     {
-        //[Key]
+        [Key]
         public int Id { get; set; }
-        //[Key]
+        public DateTime Date { get; set; }
+        public int Count { get; set; }
+
+
         public int BookId { get; set; }
 
-        //[Key]
-        public int AuthorId { get; set; }
-
-        
-        public virtual Author Author { get; set; }
-        
         public virtual Book Book { get; set; }
-        
-        
     }
 }
