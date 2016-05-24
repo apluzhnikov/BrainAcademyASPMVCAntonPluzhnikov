@@ -1,5 +1,4 @@
-﻿
-using BooksEntityApproach.Configs;
+﻿using BooksEntityApproach.Configs;
 using DataObjectsLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -13,9 +12,9 @@ namespace BooksEntityApproach
     public class LibraryDBContext : DbContext
     {
         public LibraryDBContext()
+            : base("name=LibraryDB") {
             //: base("name=LibraryDBBA") {
-                : base("name=LibraryDBBA") {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CustomersProductsDBContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomersProductsDBContext, Configuration>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<LibraryDBContext>());

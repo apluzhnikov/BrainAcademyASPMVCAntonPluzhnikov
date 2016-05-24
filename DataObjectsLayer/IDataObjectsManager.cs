@@ -8,7 +8,7 @@ namespace DataObjectsLayer
 {
     public interface IDataObjectsManager<T>
     {
-        T this[int index] { get; }
+        T GetById(int id);
         IEnumerable<T> GetAll();
         bool Add(T dataObject);
         bool Remove(T dataObject);

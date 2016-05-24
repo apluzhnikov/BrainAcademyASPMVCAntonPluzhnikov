@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataObjectsLayer.Models
 {    
-    public class Library
+    public class Library : LibraryEntity
     {
         //[Key]
-        public int Id { get; set; }
+        public override int Id { get; set; }
         //[Key]
         public int BookId { get; set; }
 

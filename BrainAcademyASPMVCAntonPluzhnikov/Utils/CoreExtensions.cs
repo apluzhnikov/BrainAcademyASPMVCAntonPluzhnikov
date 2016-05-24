@@ -36,6 +36,30 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Utils
             Books.Add(library.Book);
             //Books.Add (new Book { Id = id, Title = title, ISBN = isbn });
         }
+
+
+        public static string GetHitsStatistics(this List<Hit> hits) {
+            var statistic = string.Empty;
+
+            var dt = new Google.DataTable.Net.Wrapper.DataTable();            
+            dt.AddColumn(new Google.DataTable.Net.Wrapper.Column(Google.DataTable.Net.Wrapper.ColumnType.Number, "Count", "Count"));
+            dt.AddColumn(new Google.DataTable.Net.Wrapper.Column(Google.DataTable.Net.Wrapper.ColumnType.String, "Date", "Date"));
+
+            foreach (var hit in hits)
+            {
+                var row = dt.NewRow();
+                row
+                    .AddCellRange(new Google.DataTable.Net.Wrapper.Cell[] 
+                    {
+                        new Google.DataTable.Net.Wrapper.Cell(hit.Count),
+                        new Google.DataTable.Net.Wrapper.Cell(hit.Date)
+                    }
+                    );
+                dt.AddRow(row);
+            } 
+
+            return statistic;
+        }
         
                 
     }

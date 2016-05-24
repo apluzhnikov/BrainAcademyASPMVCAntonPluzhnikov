@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace DataObjectsLayer.Models
 {
     //[MetadataType(typeof(AuthorMetadata))]
-    public class Author
+    public class Author : LibraryEntity
     {
         [Key]
         [Required]
         [Column("AuthorId")]
-        public int Id { get; set; }
+        public override int Id { get; set; }
 
         [Required, MinLength(2), MaxLength(20)]
         public string FirstName { get; set; }

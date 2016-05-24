@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BooksEntityApproach
 {
     public abstract class DataObjectsManager<T> : IDisposable, IDataObjectsManager<T>
-        where T : class
+        where T : LibraryEntity
     {
         protected LibraryDBContext dbContext;
 
@@ -22,10 +22,9 @@ namespace BooksEntityApproach
             dbset = dbContext.Set<T>();
         }
 
-        public T this[int index] {
-            get {
-                return dbset.ElementAt(index);
-            }
+        public T GetById(int id)
+        {            
+            return dbset.First(arg=>arg.Id == id);
         }
 
         public bool Add(T dataObject) {

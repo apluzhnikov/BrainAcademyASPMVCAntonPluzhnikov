@@ -45,6 +45,7 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Hit.cs" />
+    <Compile Include="Models\LibraryEntity.cs" />
     <Compile Include="Models\Metadata\AuthorMetadata.cs" />
     <Compile Include="Models\Metadata\BookMetadata.cs" />
     <Compile Include="Models\Library.cs" />

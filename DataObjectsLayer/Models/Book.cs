@@ -9,13 +9,13 @@ using System.Web;
 namespace DataObjectsLayer.Models
 {
     //[MetadataType(typeof(BookMetadata))]
-    public class Book //: IValidatableObject
+    public class Book : LibraryEntity //: IValidatableObject
     {
 
         [Key]
         [Required]
         [Column("BookId")]
-        public int Id { get; set; }
+        public override int Id { get; set; }
 
         [Required, MaxLength(200)]
         public string Title { get; set; }

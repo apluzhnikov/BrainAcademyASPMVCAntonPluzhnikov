@@ -16,6 +16,8 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
         readonly private IDataObjectsManager<Library> _libraryManager;
         readonly private IDataObjectsManager<Book> _booksManager;
 
+        private Book Book;
+
         public AuthorsController() {
             _authorsManager = UnityConfig.GetConfiguredContainer().Resolve<IDataObjectsManager<Author>>("ef");
             _libraryManager = UnityConfig.GetConfiguredContainer().Resolve<IDataObjectsManager<Library>>("ef");
@@ -23,7 +25,9 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
         }
 
         // GET: Authors
-        public ActionResult Index() {
+        public ActionResult Index(int bookId = 0) {
+            if (bookId != 0)
+                Book = _booksManager.GetById(bookId);
             var authors = _authorsManager.GetAll();
             return View(authors);
         }
@@ -33,10 +37,18 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
             return View();
         }
 
-        private int currentBookId = 0;
+        public ActionResult AddAuthorToBook(int id) {
+            if (Book != null)
+            {
+
+            }
+            return RedirectToAction("Index", "Books");
+        }
+
+        
         // GET: Authors/Create
         public ActionResult Create(int bookId = 0) {
-            currentBookId = bookId;
+            //currentBookId = bookId;
             return View();
         }
 
@@ -49,14 +61,14 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
                 if (!ModelState.IsValid)
                     return View();
 
-                if (currentBookId > 0)
+                /*if (currentBookId > 0)
                 {
                     var book = _booksManager.GetAll().First(arg => arg.Id == currentBookId);
                     if (book != null)
                         _libraryManager.Add(new Library { Author = author, Book = book });
                     else
                         _authorsManager.Add(author);
-                } else
+                } else*/
                 {
                     _authorsManager.Add(author);                    
                 }

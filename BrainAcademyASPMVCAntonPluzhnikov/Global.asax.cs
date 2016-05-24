@@ -23,10 +23,10 @@ namespace BrainAcademyASPMVCAntonPluzhnikov
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
+
             /*PersonsController.Persons.Add("Anton");
             PersonsController.Persons.Add("Vasia");*/
-
+            
             /*IDataObjectsManager<Library> dataManager = new LibraryDataManager();
 
             foreach (var library in dataManager.GetAll())
