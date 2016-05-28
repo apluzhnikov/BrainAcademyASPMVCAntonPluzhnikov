@@ -41,9 +41,9 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Utils
         public static string GetHitsStatistics(this List<Hit> hits) {
             var statistic = string.Empty;
 
-            var dt = new Google.DataTable.Net.Wrapper.DataTable();            
-            dt.AddColumn(new Google.DataTable.Net.Wrapper.Column(Google.DataTable.Net.Wrapper.ColumnType.Number, "Count", "Count"));
+            var dt = new Google.DataTable.Net.Wrapper.DataTable();
             dt.AddColumn(new Google.DataTable.Net.Wrapper.Column(Google.DataTable.Net.Wrapper.ColumnType.String, "Date", "Date"));
+            dt.AddColumn(new Google.DataTable.Net.Wrapper.Column(Google.DataTable.Net.Wrapper.ColumnType.Number, "Count", "Count"));
 
             foreach (var hit in hits)
             {
@@ -51,12 +51,14 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Utils
                 row
                     .AddCellRange(new Google.DataTable.Net.Wrapper.Cell[] 
                     {
-                        new Google.DataTable.Net.Wrapper.Cell(hit.Count),
-                        new Google.DataTable.Net.Wrapper.Cell(hit.Date)
+                        new Google.DataTable.Net.Wrapper.Cell(hit.Date),
+                        new Google.DataTable.Net.Wrapper.Cell(hit.Count)
                     }
                     );
                 dt.AddRow(row);
-            } 
+            }
+
+            statistic = dt.GetJson();
 
             return statistic;
         }

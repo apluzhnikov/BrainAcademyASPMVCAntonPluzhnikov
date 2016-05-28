@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<DataObjectsLayer.Models.Book>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -20,22 +17,78 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.ActionLink("Add Author", "AddAuthor", new { id = item.Id }) |
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.ActionLink("Add Author", "AddAuthor", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                <a href="javascript:void(0);" class="chart-btn"
+                   data-myid="@item.Id">
+                    Draw chart
+                </a>
+            </td>
+        </tr>
+        <div id="chart_div">
+        </div>
+    }
 </table>
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart', 'line'] });
+        google.charts.setOnLoadCallback(drawBackgroundColor);
+        function drawBackgroundColor(id) {
+            var options = {
+                hAxis: {
+                    title: 'Date'
+                },
+                vAxis: {
+                    title: 'Count'
+                },
+                backgroundColor: '#f1f8e9'
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            if (typeof (id) === "undefined") {
+                var data = new google.visualization.DataTable([]);
+                chart.draw(data, options);
+            } else {
+                $.ajax({
+                    url: "/api/charts/hits/" + id,
+                    content: "application/json",
+                    beforesend: function(){
+                        $.blockUI({
+                            message:"Loading data"
+                        });
+                    },
+                    success: function(data){
+                        var dataJson = new google.visualization.DataTable(data);
+                        chart.draw(dataJson, options);
+                    },
+                    error: function () {
+                        alert(':(');
+                    },
+                    complete: function(){
+                        $.unblockUI();
+                    },
+                    async: false
+                }).responseText;
+            }
+        }
+
+        $(document).ready(function () {
+            $('a.chart-btn').click(function () {
+                var id = $(this).data('myid');
+                drawBackgroundColor(id)
+            })
+        });
+    </script>
+}

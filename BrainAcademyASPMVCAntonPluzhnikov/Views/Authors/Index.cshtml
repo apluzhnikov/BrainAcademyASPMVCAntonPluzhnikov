@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<DataObjectsLayer.Models.Author>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("List of books", "Index", "Books")
 </p>
 <table class="table">
     <tr>
@@ -20,22 +20,60 @@
         </th>
         <th></th>
     </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @if (ViewData["bookId"] != null && ((int)ViewData["bookId"]) != 0)
+                {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id }) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
 
+                }
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Edit", "Edit", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Details", "Details", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Delete", "Delete", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
+
+            </td>
+        </tr>
+    }
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.applyToBook').click(function (e) {
+                $(this).modal("show")
+            })
+            //$('.applyToBook').modal("show")
+        });
+    </script>
+}

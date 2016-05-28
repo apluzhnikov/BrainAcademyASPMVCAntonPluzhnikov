@@ -17,6 +17,7 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
         readonly private IDataObjectsManager<Book> _booksManager;
 
         private Book Book;
+        private Author Author;
 
         public AuthorsController() {
             _authorsManager = UnityConfig.GetConfiguredContainer().Resolve<IDataObjectsManager<Author>>("ef");
@@ -26,9 +27,8 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
 
         // GET: Authors
         public ActionResult Index(int bookId = 0) {
-            if (bookId != 0)
-                Book = _booksManager.GetById(bookId);
             var authors = _authorsManager.GetAll();
+            ViewData["bookId"] = bookId;
             return View(authors);
         }
 
@@ -37,15 +37,21 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
             return View();
         }
 
-        public ActionResult AddAuthorToBook(int id) {
-            if (Book != null)
+        public ActionResult AddAuthorToBook(int id, int bookId = 0) {
+            if (bookId != 0)
+                Book = _booksManager.GetById(bookId);
+            if (id != 0)
+                Author = _authorsManager.GetById(id);
+            if (Book != null && Author != null)
             {
-
+                _libraryManager.Add(new Library() { BookId = Book.Id, AuthorId = Author.Id });
+                _libraryManager.SaveChanges();
             }
-            return RedirectToAction("Index", "Books");
+            //return RedirectToAction("Index", "Books");
+            return RedirectToAction("Index");
         }
 
-        
+
         // GET: Authors/Create
         public ActionResult Create(int bookId = 0) {
             //currentBookId = bookId;
@@ -70,7 +76,7 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
                         _authorsManager.Add(author);
                 } else*/
                 {
-                    _authorsManager.Add(author);                    
+                    _authorsManager.Add(author);
                 }
                 _authorsManager.SaveChanges();
                 return RedirectToAction("Index");

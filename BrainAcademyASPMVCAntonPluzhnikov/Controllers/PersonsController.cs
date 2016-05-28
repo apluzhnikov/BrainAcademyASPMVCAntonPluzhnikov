@@ -12,28 +12,24 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
     {
         public static IList<Person> Persons = new List<Person>();
         // GET: Persons
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             IEnumerable<Person> persons = Persons;
             return View(persons);
         }
 
         // GET: Persons/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Details(int id) {
             return View();
         }
 
         // GET: Persons/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
         // POST: Persons/Create
         [HttpPost]
-        public ActionResult Create(Person person)
-        {
+        public ActionResult Create(Person person) {
             try
             {
                 // TODO: Add insert logic here
@@ -48,16 +44,14 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
         }
 
         // GET: Persons/Edit/5
-        public ActionResult Edit(int id)
-        {
+        public ActionResult Edit(int id) {
             Person person = Persons.First(x => x.Id == id);
             return View(person);
         }
 
         // POST: Persons/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Person person)
-        {
+        public ActionResult Edit(int id, Person person) {
             try
             {
                 // TODO: Add update logic here
@@ -72,15 +66,13 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
         }
 
         // GET: Persons/Delete/5
-        public ActionResult Delete(int id)
-        {
+        public ActionResult Delete(int id) {
             return View();
         }
 
         // POST: Persons/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Person person)
-        {
+        public ActionResult Delete(int id, Person person) {
             try
             {
                 // TODO: Add delete logic here

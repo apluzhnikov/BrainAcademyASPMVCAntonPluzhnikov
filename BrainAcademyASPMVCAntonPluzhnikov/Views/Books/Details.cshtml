@@ -1,12 +1,9 @@
 ﻿@model DataObjectsLayer.Models.Book
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Details</h2>
-
 <div>
     <h4>Book</h4>
     <hr />
@@ -14,29 +11,23 @@
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.ISBN)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ISBN)
         </dd>
     </dl>
     <div id="chart_div">
-
     </div>
-
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
 @section Scripts{
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
