@@ -120,6 +120,54 @@ namespace BrainAcademyASPMVCAntonPluzhnikov.Controllers
             }
         }
 
+        // GET: Persons/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var book = _booksManager.GetAll().First(x => x.Id == id);
+            return View(book);
+        }
+
+        // POST: Persons/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, Book book)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                var b = _booksManager.GetAll().First(x => x.Id == id);
+                b.ISBN = book.ISBN;
+                b.Title = book.Title;
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Persons/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Persons/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, Book book)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                _booksManager.Remove(book);
+                //Persons.Remove(person);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public string GetAuthors(Book book) {
             var b = _booksManager.GetById(book.Id);
             List<Author> authors = new List<Author>();
