@@ -20,13 +20,30 @@
         <dd>
             @Html.DisplayFor(model => model.ISBN)
         </dd>
+        <dt>
+            Authors
+        </dt>
+        <dd>
+            @{
+                string authors = string.Empty;
+                foreach (var link in Model.Library)
+                {
+                    authors += link.Author.FirstName + " " + link.Author.LastName + ",";
+                }
+                if (!string.IsNullOrWhiteSpace(authors))
+                {
+                    authors = authors.Remove(authors.Length - 2);
+                }
+                @authors
+            }
+        </dd>
     </dl>
     <div id="chart_div">
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Back to List", "Index")</button>
 </p>
 @section Scripts{
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<DataObjectsLayer.Models.Author>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Authors";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Index</h2>
+<h2>Authors</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    @Html.ActionLink("List of books", "Index", "Books")
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Create New", "Create")</button>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Go to books", "Index", "Books")</button>
 </p>
 <table class="table">
     <tr>
@@ -32,14 +30,11 @@
             <td>
                 @if (ViewData["bookId"] != null && ((int)ViewData["bookId"]) != 0)
                 {
-
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id, bookId = ViewData["bookId"] })"/>
-
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="">@Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id, bookId = ViewData["bookId"] })</button>
                 }
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Edit", "Edit", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Details", "Details", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="@Html.ActionLink("Delete", "Delete", new { id = item.Id, bookId = ViewData["bookId"] })"></button>
-
+                <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
             </td>
         </tr>
     }
@@ -52,14 +47,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                ...
+                <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary">Yes</button>
             </div>
         </div>
     </div>

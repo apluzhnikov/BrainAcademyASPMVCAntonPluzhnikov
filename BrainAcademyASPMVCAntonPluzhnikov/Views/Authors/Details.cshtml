@@ -1,0 +1,35 @@
+﻿@model DataObjectsLayer.Models.Author
+
+@{
+    ViewBag.Title = "Author's details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Author's details</h2>
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Back to List", "Index")</button>
+</p>
