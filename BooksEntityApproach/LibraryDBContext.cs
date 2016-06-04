@@ -13,8 +13,8 @@ namespace BooksEntityApproach
     {
         public LibraryDBContext()
             //: base("name=LibraryDB") {
-            : base("name=LibraryDBBA") { 
-            //: base("name=LibraryDBBAPUB") {
+            //: base("name=LibraryDBBA") { 
+            : base("name=LibraryDBBAPUB") {
             Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CustomersProductsDBContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomersProductsDBContext, Configuration>());

@@ -1,19 +1,16 @@
 ﻿@model DataObjectsLayer.Models.Book
 
 @{
-    ViewBag.Title = "Edit the Book";
+    ViewBag.Title = "Edit the book";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit the Book</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Book</h4>
+    <div class="form-horizontal">        
+        <h2>Edit</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -47,11 +44,12 @@
                     <br>
                 }
                 <br>
+                <hr />
                 <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Link", "AddAuthor", new { id = Model.Id })</button>
             </div>
 
         </div>
-
+        <hr />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="button" class="btn btn-primary btn-lg"><input type="submit" value="Save" class="btn btn-default" /></button>

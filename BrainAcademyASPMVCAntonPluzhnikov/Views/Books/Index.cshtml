@@ -5,8 +5,7 @@
 }
 <h2>Library</h2>
 <p>
-    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Create New", "Create")</button>
-    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Clear cache", "IndexRemoveCache")</button>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Create New", "Create")</button>    
     <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Go to authors", "Index", "Authors")</button>
 </p>
 <table class="table">
@@ -44,6 +43,9 @@
         </div>
     }
 </table>
+<p>
+    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Clear cache", "IndexRemoveCache")</button>
+</p>
 @section Scripts{
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
