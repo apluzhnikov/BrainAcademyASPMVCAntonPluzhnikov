@@ -30,7 +30,7 @@
             <td>
                 @if (ViewData["bookId"] != null && ((int)ViewData["bookId"]) != 0)
                 {
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="">@Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id, bookId = ViewData["bookId"] })</button>
+                    <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Select", "AddAuthorToBook", new { id = item.Id, bookId = ViewData["bookId"] })</button>
                 }
                 <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
                 <button type="button" class="btn btn-primary btn-lg">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
@@ -40,32 +40,3 @@
     }
 </table>
 
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-@section Scripts{
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.applyToBook').click(function (e) {
-                $(this).modal("show")
-            })
-            //$('.applyToBook').modal("show")
-        });
-    </script>
-}

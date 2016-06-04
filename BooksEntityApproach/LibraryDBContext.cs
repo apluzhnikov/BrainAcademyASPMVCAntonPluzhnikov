@@ -12,8 +12,8 @@ namespace BooksEntityApproach
     public class LibraryDBContext : DbContext
     {
         public LibraryDBContext()
-            : base("name=LibraryDB") {
-            //: base("name=LibraryDBBA")
+            //: base("name=LibraryDB") {
+            : base("name=LibraryDBBA") { 
             //: base("name=LibraryDBBAPUB") {
             Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDBContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CustomersProductsDBContext>());
@@ -30,10 +30,7 @@ namespace BooksEntityApproach
 
             modelBuilder.Configurations.Add(new LibraryConfig());
 
-            /*modelBuilder.Configurations.Add(new BookConfig());
-            
-            modelBuilder.Configurations.Add(new CustomerConfig());
-            modelBuilder.Configurations.Add(new CustomersProductsConfig());*/
+            //modelBuilder.Configurations.Add(new BookConfig());
         }
     }
 }
